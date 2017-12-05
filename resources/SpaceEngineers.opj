@@ -111,7 +111,7 @@
         {
           "Type": "Simple",
           "Hook": {
-            "InjectionIndex": 452,
+            "InjectionIndex": 518,
             "ReturnBehavior": 0,
             "ArgumentBehavior": 0,
             "ArgumentString": null,
@@ -120,7 +120,7 @@
             "HookName": "IOnNextTick",
             "AssemblyName": "Sandbox.Game.dll",
             "TypeName": "Sandbox.MySandboxGame",
-            "Flagged": true,
+            "Flagged": false,
             "Signature": {
               "Exposure": 1,
               "Name": "Update",
