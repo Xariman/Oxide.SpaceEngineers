@@ -239,6 +239,32 @@
             "BaseHookName": null,
             "HookCategory": "Player"
           }
+        },
+        {
+          "Type": "Simple",
+          "Hook": {
+            "InjectionIndex": 0,
+            "ReturnBehavior": 1,
+            "ArgumentBehavior": 4,
+            "ArgumentString": "a0",
+            "HookTypeName": "Simple",
+            "Name": "OnScriptedChatMessage",
+            "HookName": "OnScriptedChatMessage",
+            "AssemblyName": "Sandbox.Game.dll",
+            "TypeName": "Sandbox.Engine.Multiplayer.MyMultiplayerBase",
+            "Flagged": false,
+            "Signature": {
+              "Exposure": 1,
+              "Name": "OnScriptedChatMessage",
+              "ReturnType": "System.Void",
+              "Parameters": [
+                "Sandbox.Engine.Multiplayer.ScriptedChatMsg&"
+              ]
+            },
+            "MSILHash": "9epgqkrr6qMomOXoA5ITIVfJ6Iyh4XF9jAd7x9pQFdA=",
+            "BaseHookName": null,
+            "HookCategory": "Server"
+          }
         }
       ],
       "Modifiers": [
@@ -334,6 +360,61 @@
         }
       ],
       "Modifiers": [],
+      "Fields": []
+    },
+    {
+      "AssemblyName": "VRage.dll",
+      "Hooks": [
+        {
+          "Type": "Simple",
+          "Hook": {
+            "InjectionIndex": 3,
+            "ReturnBehavior": 1,
+            "ArgumentBehavior": 2,
+            "ArgumentString": null,
+            "HookTypeName": "Simple",
+            "Name": "MyLogWriteLineAndConsole [internal]",
+            "HookName": "OnWriteLineAndConsole",
+            "AssemblyName": "VRage.dll",
+            "TypeName": "VRage.Utils.MyLog",
+            "Flagged": false,
+            "Signature": {
+              "Exposure": 2,
+              "Name": "WriteLineAndConsole",
+              "ReturnType": "System.Void",
+              "Parameters": [
+                "System.String"
+              ]
+            },
+            "MSILHash": "plGmbybOfhHaPJ92DIhkJD3MNYO5/S1mWRQ28xSzP48=",
+            "BaseHookName": null,
+            "HookCategory": "Server"
+          }
+        }
+      ],
+      "Modifiers": [
+        {
+          "Name": "VRage.Utils.MyLog::AppendDateAndTime",
+          "AssemblyName": "VRage.dll",
+          "TypeName": "VRage.Utils.MyLog",
+          "Type": 1,
+          "TargetExposure": [
+            2
+          ],
+          "Flagged": false,
+          "Signature": {
+            "Exposure": [
+              0
+            ],
+            "Name": "AppendDateAndTime",
+            "FullTypeName": "System.Void",
+            "Parameters": [
+              "System.Text.StringBuilder"
+            ]
+          },
+          "MSILHash": "THwZKg3CIDzx1zsGg+y1Wfj2UYsrcSv1PrXSx6krkic="
+        }
+      ],
       "Fields": []
     }
   ]

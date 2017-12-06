@@ -16,6 +16,10 @@ namespace Oxide.Game.SpaceEngineers
     /// </summary>
     public partial class SpaceEngineersCore : CSPlugin
     {
+
+        private SpaceEngineersLogger logger;
+
+
         #region Initialization
 
         /// <summary>
@@ -72,14 +76,16 @@ namespace Oxide.Game.SpaceEngineers
         private int m_totalTimeInMilliseconds;
 
         /// <summary>
-        /// Starts the logging
+        /// Called when the it's safe to initialize logging
         /// </summary>
-        private void InitializeLogging()
+        [HookMethod("InitLogging")]
+        private void InitLogging()
         {
+            // Create our logger and add it to the compound logger
             Interface.Oxide.NextTick(() =>
             {
-                //logger = new SpaceEngineersLogger();
-                //Interface.Oxide.RootLogger.AddLogger(logger);
+                logger = new SpaceEngineersLogger();
+                Interface.Oxide.RootLogger.AddLogger(logger);
                 Interface.Oxide.RootLogger.DisableCache();
             });
         }

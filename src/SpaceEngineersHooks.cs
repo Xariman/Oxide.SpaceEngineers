@@ -44,13 +44,11 @@ namespace Oxide.Game.SpaceEngineers
         /// <summary>
         /// Called when the server logs append
         /// </summary>
-        [HookMethod("OnWriteLine")]
-        private void OnWriteLine(string message)
+        [HookMethod("OnWriteLineAndConsole")]
+        private bool OnWriteLineAndConsole(string message)
         {
-            if (string.IsNullOrEmpty(message) || Filter.Any(message.StartsWith)) return;
-
-            var color = ConsoleColor.Gray;
-            Interface.Oxide.ServerConsole.AddMessage(message, color);
+            SpaceEngineersExtension.HandleLog(message);
+            return true;
         }
 
         /// <summary>

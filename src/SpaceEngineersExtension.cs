@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using VRage.Game;
+using System.Text;
+using VRage.Utils;
 
 namespace Oxide.Game.SpaceEngineers
 {
@@ -112,9 +114,6 @@ namespace Oxide.Game.SpaceEngineers
 
             if (Interface.Oxide.EnableConsole()) Interface.Oxide.ServerConsole.Input += ServerConsoleOnInput;
 
-            // TODO: Add console log handling
-
-            Interface.Oxide.ServerConsole.Input += ServerConsoleOnInput;
         }
 
         internal static void ServerConsole()
@@ -157,23 +156,33 @@ namespace Oxide.Game.SpaceEngineers
             }
         }
 
-        private static void HandleLog(string message, string stackTrace)
+        internal static void HandleLog(string message)
         {
             if (string.IsNullOrEmpty(message) || Filter.Any(message.Contains)) return;
 
             var color = ConsoleColor.Gray;
-            var remoteType = "generic";
 
             // TODO: Color handling
 
-            Interface.Oxide.ServerConsole.AddMessage(message, color);
-            Interface.Oxide.RemoteConsole.SendMessage(new RemoteMessage
-            {
-                Message = message,
-                Identifier = 0,
-                Type = remoteType,
-                Stacktrace = stackTrace
-            });
+            if (message.Contains("mod: "))
+                color = ConsoleColor.Cyan;
+            if (message.Contains("Server ") || message.Contains("Session loaded") || message.Contains("Game ready..."))
+                color = ConsoleColor.Green;
+
+            if (message.StartsWith("Error:") || message.StartsWith("Stacktrace:") || message.Contains("exception", StringComparison.CurrentCultureIgnoreCase))
+                color = ConsoleColor.Red;
+            if (message.StartsWith("Warning:"))
+                color = ConsoleColor.Yellow;
+            if (message.StartsWith("Debug:"))
+                color = ConsoleColor.Gray;
+
+            StringBuilder sb = new StringBuilder();
+            MyLog.Default.AppendDateAndTime(sb);
+            sb.Append(": ");
+            sb.Append(message);
+
+            Interface.Oxide.ServerConsole.AddMessage(sb.ToString(), color);
         }
+        
     }
 }
